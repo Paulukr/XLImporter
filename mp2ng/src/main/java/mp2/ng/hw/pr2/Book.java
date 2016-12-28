@@ -13,7 +13,9 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 public class Book {
-	List<Sentence> text;
+	List<Sentence> theText;
+	List<String> lexicon = new ArrayList<>();
+	List<List<Integer>> content = new ArrayList<>();
 	public static void main(String[] args) {
 		String path = "E:\\Android\\ngdwp\\ngGitHome\\mp2ng\\src\\main\\java\\mp2\\ng\\hw\\pr2\\data\\Galaxy.txt";
 		String path2 = "E:\\Galaxy.txt";
@@ -44,67 +46,43 @@ public class Book {
 		String text = addText(path);
 		if(text == null)
 			System.exit(0);
-		System.out.println(text.length());
-		//clean
-		text = text.replaceAll("[[^A-Za-z0-9]&&[^\\.?!,:;@#$ \"\'$]]", " ").replaceAll(" +", " ");
-		System.out.println(text.length());
-		
-		//reveal punctuation
-		text = text.replaceAll("([A-Za-z0-9])([\\.?!,:;@#$ \"$])", "$1 $2");
-		//reveal punctuation
-		text = text.replaceAll("([\\.?!,:;@#$ \"$])([A-Za-z0-9])", "$1 $2").replaceAll(" +", " ");
-//		for (int i = 0; i < 30; i++) {
-//			System.out.println(text.substring(i*30, (i+1)*30));
-//		}
-		List<List<String>> sentences = new ArrayList<>();
-		String dot = ".";//intern dot
+		text = clean(text);
+//		List<List<String>> rawSentences = new ArrayList<>();
+
 		String[] units = text.split(" ");
-		List<String> sortedUnits = new ArrayList<>();
+//		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
+		
+		Arrays.asList(units).stream().map(String::toLowerCase).distinct().sorted().forEach(lexicon::add);
+		System.out.println("Words count " + lexicon.size());
+//		for (int i = 0; i < 500; i++) {
+//			System.out.println(i+"  " +lexicon.get(i));
+//		}
+		
+		String[] rawSentences = text.split(".");
+		content.add(new ArrayList<>());
+
 		for (String string : units) {
-			sortedUnits.add(string.toLowerCase().intern());
-		}
-
-	
-		sentences.add(new ArrayList<>());
-		for (int i = 0; i < units.length; i++) {
-			units[i] = units[i].intern();
-			if(units[i] == dot){
-				sentences.add(new ArrayList<>());
-			}else {
-				sentences.get(sentences.size()-1).add(units[i]);
+			if((".").equals(string)){
+				content.add(new ArrayList<>());
+				System.out.println("dsasd");
+			}else{
+				int i = Collections.binarySearch(lexicon, string);
+				if(i<0)
+					System.out.println("Lexicon error");
+				content.get(content.size()-1).add(i);
 			}
-			if(sentences.size() == 20)
-				break;
 		}
-		System.out.println(sentences.size());
-		TreeSet<String> u = new TreeSet<>();
-		
-		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
-		List<String> words = new ArrayList<>();
-		Arrays.asList(units).parallelStream().distinct().sorted().forEach(words::add);
-		System.out.println("Words count " + words.size());
+//		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
 
-//		String[] words = (String[]) Arrays.asList(units).parallelStream().distinct().sorted().toArray();
-		// Ljava.lang.Object; cannot be cast to [Ljava.lang.String;
-//		System.out.println("Words count " + words.length);
-		Arrays.sort(units);
+		for (List sen : content) {
+			for(Object w : sen)
+				System.out.print(lexicon.get((Integer)w)+ " ");
+			System.out.println();
+		}
+	}
 
-//		sortedUnits.add(units[0]);
-//		for (int i = 1; i < units.length; i++) {
-//			if(units[i] == units[i-1])
-//				continue;
-//			sortedUnits.add(units[i]);
-//			System.out.println(sortedUnits.get(i));
-//			System.out.println(units[i].hashCode() + " " + units[i].hashCode());
-//		}
-		Collections.sort(sortedUnits);
-//		for (int i = 1; i < 500; i++) {
-//			System.out.println(i + sortedUnits.get(i));
-//		}
-		System.out.println(sortedUnits.size());
-		System.out.println(sortedUnits.get(1));
-		System.out.println(sortedUnits.get(1) + " " + sortedUnits.get(2) + " " + (sortedUnits.get(1)==sortedUnits.get(2)));
-		
+
+	public static String clean(String text) {
 		/*
 		 * abc.replaceAll("(([A-Za-z0-9])(\\.))" with...
 		 * "&$0&$1&$2&$3" = ab&c.&c.&c&.
@@ -113,20 +91,12 @@ public class Book {
 		 * "&$0&$1&$2" = abc&.&.&.
 		 * "$1 $2" = abc. .
 		 */
-
-//
-//		//intern
-//		for (int i = 0; i < sentences.length; i++) {
-//			sentences[i] = sentences[i].intern();
-//			
-//		}
-////		String[] sentences = text.split("\\.");
-//		//intern
-//		for (int i = 0; i < sentences.length; i++) {
-//			sentences[i] = sentences[i].intern();
-			
-//		}
-		
-		
+		//remove unknown characters
+		text = text.replaceAll("[[^A-Za-z0-9]&&[^\\.?!,:;@#$ \"\'$]]", " ").replaceAll(" +", " ");
+		//reveal punctuation after
+		text = text.replaceAll("([\'A-Za-z0-9])([^A-Za-z0-9])", "$1 $2");
+		//reveal punctuation before
+		text = text.replaceAll("([^A-Za-z0-9])([A-Za-z0-9\'])", "$1 $2").replaceAll(" +", " ");
+		return text;
 	}
 }
