@@ -14,6 +14,7 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_f1U0wMR_Eea0W_1qPwGJqw" name="Player" isAbstract="true">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_NuCVoMeoEeavlJ6db9fUWw" name="field" type="_OTu50LpZEeafwqTUchs3kw" aggregation="shared" association="_NtaqkMeoEeavlJ6db9fUWw"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_baMdAM0hEeaeTI4Vfnho6w" name="view" type="_Sd-I4M0hEeaeTI4Vfnho6w" aggregation="composite" association="_bZiVsM0hEeaeTI4Vfnho6w"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_4eQ5YMR_Eea0W_1qPwGJqw" name="Game">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_bygDEcSAEea0W_1qPwGJqw" name="player" type="_f1U0wMR_Eea0W_1qPwGJqw" aggregation="shared" association="_bye08MSAEea0W_1qPwGJqw">
@@ -22,9 +23,10 @@
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_n3NLEMSAEea0W_1qPwGJqw" name="PC"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_uJDjoMSAEea0W_1qPwGJqw" name="UI"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uJDjoMSAEea0W_1qPwGJqw" name="Human"/>
     <packagedElement xmi:type="uml:Realization" xmi:id="_54e3kMeTEeavlJ6db9fUWw" client="_n3NLEMSAEea0W_1qPwGJqw" supplier="_f1U0wMR_Eea0W_1qPwGJqw"/>
     <packagedElement xmi:type="uml:Realization" xmi:id="_963H4MeTEeavlJ6db9fUWw" client="_uJDjoMSAEea0W_1qPwGJqw" supplier="_f1U0wMR_Eea0W_1qPwGJqw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Sd-I4M0hEeaeTI4Vfnho6w" name="View"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_8PqOwMR8Eea0W_1qPwGJqw" memberEnd="_8P1N4MR8Eea0W_1qPwGJqw _8P2cAMR8Eea0W_1qPwGJqw">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_8Pt5IMR8Eea0W_1qPwGJqw" source="org.eclipse.papyrus">
@@ -61,6 +63,12 @@
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Nte8AMeoEeavlJ6db9fUWw" key="nature" value="UML_Nature"/>
     </eAnnotations>
     <ownedEnd xmi:type="uml:Property" xmi:id="_NuC8sMeoEeavlJ6db9fUWw" name="player" type="_f1U0wMR_Eea0W_1qPwGJqw" association="_NtaqkMeoEeavlJ6db9fUWw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_bZiVsM0hEeaeTI4Vfnho6w" memberEnd="_baL18M0hEeaeTI4Vfnho6w _baMdAM0hEeaeTI4Vfnho6w">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bZkx8M0hEeaeTI4Vfnho6w" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bZlZAM0hEeaeTI4Vfnho6w" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_baL18M0hEeaeTI4Vfnho6w" name="player" type="_f1U0wMR_Eea0W_1qPwGJqw" association="_bZiVsM0hEeaeTI4Vfnho6w"/>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_QJwEcLpSEeafwqTUchs3kw">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QJ088LpSEeafwqTUchs3kw" source="http://www.eclipse.org/uml2/2.0.0/UML">

@@ -6,10 +6,7 @@ package mp2.ng.hw.hw4.Battleship;
 
 import java.util.Objects;
 
-/************************************************************/
-/**
- * 
- */
+
  public abstract class Player {
 	String name;
 	Player enemy;
@@ -23,19 +20,12 @@ import java.util.Objects;
 	}
 	public abstract Point makeShot();
 	public Field.AtackResult  makeTurn(){
-
-		
-//		offendingPlayer.setResult(atackResult);
-//		updateEnemyView
-//		enemy.updateEnemyView(renderForEnemy());
-		
-//		offendingPlayer.updateEnemyView(defendingPlayer.renderForEnemy());
 		 Field.AtackResult  atackResult = Objects.requireNonNull(enemy).surviveBombardment(makeShot());
 		 updateEnemyView(enemy.renderForEnemy());
 		 return atackResult;
 	}
 	
-	public abstract Point setResult(Field.AtackResult atackResult);
+
 	public abstract void updateOwnView(String field);
 	public abstract void updateEnemyView(String field);
 	public Field.AtackResult surviveBombardment(Point point){

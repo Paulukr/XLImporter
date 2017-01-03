@@ -32,31 +32,15 @@ public class PC extends Player{
 
 	@Override
 	public void updateOwnView(String field) {
-		// TODO Auto-generated method stub
+		// PC has't view
 		
 	}
 
 	@Override
 	public void updateEnemyView(String field) {
-		// TODO Auto-generated method stub
+		// PC has't view
 		
 	}
 
-	@Override
-	public Point setResult(Field.AtackResult atackResult) {
-		// TODO Auto-generated method stub
-		switch(atackResult){
-		case HIT:
-			break;
-		case MISS:
-			break;
-		case SANK:
-			break;
-		case WIN:
-			break;
-		default:
-			break;
-		}
-		return null;
-	}
+
 }

@@ -23,11 +23,7 @@ public class PlayerGUI extends Player {
 		return target;
 	}
 
-	@Override
-	public Point setResult(AtackResult atackResult) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public void updateOwnView(String field) {

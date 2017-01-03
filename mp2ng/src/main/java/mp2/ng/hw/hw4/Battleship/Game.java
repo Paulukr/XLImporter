@@ -44,20 +44,8 @@ public class Game {
 			offendingPlayer = player1;	
 		}
 	}
-	private static class Test{
-		private void name() {
-			System.out.println("Test");
-		}
-	}
-	private static class Test2 extends Test{
-		public void name() {
-			System.out.println("Test2");
-		}
-	}
+
 	public void startGame(){
-		new Test().name();
-		Test t1 = new Test2();
-		t1.name();
 		//choose who's first
 		Random random = new Random();
 		if(random.nextBoolean())
@@ -75,8 +63,6 @@ public class Game {
 
 			if(atackResult == Field.AtackResult.MISS)
 				nextPlayer();
-//			else
-//				System.out.println(offendingPlayer.enemy.renderForEnemy());
 
 		}while(atackResult != Field.AtackResult.WIN);
 
