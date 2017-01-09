@@ -7,10 +7,10 @@ public class Issue {
 	int issueNo;
 	Object content;
 	
-	
-	public Issue(String name, boolean magasine) {
+	public Issue(String name, boolean magasine, int subcriptionIndex) {
 		this.name = name;
 		this.magasine = magasine;
+		this.subcriptionIndex = subcriptionIndex;
 	}
 
 	int publish(Object content){

@@ -9,6 +9,12 @@ public class PublishingHouse extends SubjectImproved{
 	List<Issue> issuesLive = new ArrayList<>();
 	Deque<List<Issue>> issuesArchive = new ArrayDeque<>();
 	
+	
+	public int establishNewTitle(Issue issue){
+		issuesLive.add(issue);
+		return issuesLive.size();
+	}
+	@Deprecated
 	public int addNewTitle(Issue issue){
 		issuesLive.add(issue);
 		return issuesLive.size();
