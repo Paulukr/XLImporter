@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -15,7 +16,6 @@ import java.util.TreeSet;
 public class Book {
 	List<Sentence> theText;
 	List<String> lexicon = new ArrayList<>();
-	List<List<Integer>> content = new ArrayList<>();
 	public static void main(String[] args) {
 		String path = "E:\\Android\\ngdwp\\ngGitHome\\mp2ng\\src\\main\\java\\mp2\\ng\\hw\\pr2\\data\\Galaxy.txt";
 		String path2 = "E:\\Galaxy.txt";
@@ -47,7 +47,21 @@ public class Book {
 		if(text == null)
 			System.exit(0);
 		text = clean(text);
-//		List<List<String>> rawSentences = new ArrayList<>();
+
+		LexemPool lexemPool1 = new LexemPool();
+		
+		String[] rawSentences = text.split(".");
+		for (String rawSentence : rawSentences) {
+			Sentence sentence = new Sentence();
+
+		}
+		
+		
+		
+		
+		
+		
+		
 
 		String[] units = text.split(" ");
 //		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
@@ -57,28 +71,71 @@ public class Book {
 //		for (int i = 0; i < 500; i++) {
 //			System.out.println(i+"  " +lexicon.get(i));
 //		}
-		
-		String[] rawSentences = text.split(".");
-		content.add(new ArrayList<>());
+		/*
+		 *  string text
+		 *  split
+		 *  string[] sen
+		 *  for(sen)
+		 *  	new sentence
+		 *  	split
+		 *  	string[] lexems
+		 *  	for(lexems)
+		 *  		ordered lexem = lexicon(add new lexem)
+		 *  		sentence.add ordered lexem
+		 *  		
+		 *  		
+		 *  
+		 */
+		String[] units_ = new String[units.length];
+		LexemPool lexemPoolBook = new LexemPool();
+		Outer:
+		for (int i = 0; i < units.length; i++) {	
+			String string = units[i];
+			units_[i] = lexemPoolBook.add(string).text;
+//			System.out.println(string);
 
-		for (String string : units) {
-			if((".").equals(string)){
-				content.add(new ArrayList<>());
-				System.out.println("dsasd");
-			}else{
-				int i = Collections.binarySearch(lexicon, string);
-				if(i<0)
-					System.out.println("Lexicon error");
-				content.get(content.size()-1).add(i);
-			}
+			
 		}
+		
+		System.out.println(lexemPoolBook.lexems.size());
+		System.out.println("units");
+		for (int i = 100; i < 140; i++) {
+		System.out.print("  " +units[i]);
+	}
+		System.out.println("\nunits_");
+		for (int i = 100; i < 140; i++) {
+		System.out.print("  " +units_[i]);
+	}
+		String outText = "";
+		outText = Arrays.asList(units_).stream().reduce((a,b) -> {return a + " " + b;}).toString();
+		System.out.println("Result " + text.equals(outText));
+//		Outer:
+//		for (int i = 0; i < units.length; i++) {	
+//			String string = units[i];
+//			for (String lexem : lexicon) {
+//				if(lexem.equals(string)){
+//					units_[i] = lexem;
+//					continue Outer;
+//				}
+//
+//			}
+//			System.out.println("error \"" + string + "\" " + i);
+//			break Outer;
+//		}
+		System.out.println("\n" + lexicon.get(30).equals(","));
+//		lexicon.stream().map(() -> {}).fo
+//		System.out.println(lexicon.);
+		//text to lexems
+		
+		
+		
+//		String[] rawSentences = text.split(".");
+
+
+
 //		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
 
-		for (List sen : content) {
-			for(Object w : sen)
-				System.out.print(lexicon.get((Integer)w)+ " ");
-			System.out.println();
-		}
+
 	}
 
 
