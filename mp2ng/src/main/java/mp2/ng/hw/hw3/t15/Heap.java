@@ -20,13 +20,26 @@ import org.apache.log4j.Level;
 //		Hasn't standard validation procedure
 //		Hasn't attributes
 
+
+/*
+ * SAX parser Simple API for XML
+ *  event model
+ *   5 events
+ *  start document
+ *  end document
+ *  open tag
+ *  close tag
+ *  startDocument, endDocument, startElement, and endElement
+ *  
+ */
+
 public class Heap<T extends Comparable<? super T>> {
 
 	private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Heap.class.getName());
 	static{
 		logger.setLevel(Level.ERROR);
 	}
-	List<T> list = new ArrayList<>();
+	private List<T> list = new ArrayList<>();
 	{
 		list.add(null);
 	}
@@ -34,6 +47,17 @@ public class Heap<T extends Comparable<? super T>> {
 	public T get(int i){
 		return list.get(i);
 	}
+	
+	public int size() {
+		return list.size() - 1;
+	}
+	
+	public boolean isEmpty() {
+		if (list.size() > 1) 		
+			return true;
+		return false;
+	}
+
 	public T peek() {
 		if(list.size() > 1)
 			return get(1);
@@ -92,7 +116,17 @@ public class Heap<T extends Comparable<? super T>> {
 
 		return result;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public T[] toArray(T[] a) {
+		if (a.length < size())
+			a = (T[]) new Object[size()];
+		for (int i = 0; i < a.length; i++) {
+			a[i] = pop();
+		}
+		return a;
+	}
+	
 	private final T parent(int k) {
 		return list.get(k / 2);
 	}

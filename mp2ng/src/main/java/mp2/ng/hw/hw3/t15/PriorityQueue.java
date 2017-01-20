@@ -7,7 +7,8 @@ import java.util.Queue;
 
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
-public class  PriorityQueue<T extends Comparable<? super T>> implements Queue<T> {//implements Queue<E>
+public class PriorityQueue<T extends Comparable<? super T>> {// implements
+	// Queue<E> arbitrary
 	Heap<T> heap = new Heap<>();
 
 	public static void main(String[] args) {
@@ -15,79 +16,27 @@ public class  PriorityQueue<T extends Comparable<? super T>> implements Queue<T>
 
 	}
 
-	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return heap.size();
 	}
 
-	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return heap.isEmpty();
 	}
 
-	@Override
-	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+	@SuppressWarnings("unchecked")
+	public <E> E[] toArray(E[] a) {
+		return (E[]) heap.toArray((T[]) a);
 	}
 
-	@Override
-	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+	public T peek() {
+		return heap.peek();
 	}
 
-	@Override
-	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+	public T poll() {
+		return heap.pop();
 	}
 
-	@Override
-	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addAll(Collection<? extends T> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean add(T e) {
 		if (e != null) {
 			heap.push(e);
@@ -95,33 +44,4 @@ public class  PriorityQueue<T extends Comparable<? super T>> implements Queue<T>
 		}
 		return false;
 	}
-
-	@Override
-	public boolean offer(T e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public T remove() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public T poll() {
-		return heap.pop();
-	}
-
-	@Override
-	public T element() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public T peek() {
-		return heap.peek();
-	}
-
 }
