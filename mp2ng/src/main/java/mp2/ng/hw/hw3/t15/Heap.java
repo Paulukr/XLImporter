@@ -23,7 +23,9 @@ import org.apache.log4j.Level;
 public class Heap<T extends Comparable<? super T>> {
 
 	private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Heap.class.getName());
-
+	static{
+		logger.setLevel(Level.ERROR);
+	}
 	List<T> list = new ArrayList<>();
 	{
 		list.add(null);
@@ -49,15 +51,13 @@ public class Heap<T extends Comparable<? super T>> {
 	}
 
 	void pullDown(int k) {
-		logger.log(Level.INFO, "pullDown:");
 		T current = list.get(k);
 		Loop:
 		while (2 * k < list.size()) {
-			logger.log(Level.INFO, toString());
 			if((2*k+1 < list.size()) && left(k).compareTo(right(k)) > 0){
 				if (current.compareTo(right(k)) > 0){ 
 					swapRight(k);
-					k *= 2+1;
+					k = k*2+1;
 				}
 				else 
 					break Loop;
@@ -69,8 +69,9 @@ public class Heap<T extends Comparable<? super T>> {
 				else 
 					break Loop;
 			}
+			logger.log(Level.INFO, toString());
 		}
-		logger.log(Level.INFO, toString());
+
 	}
 
 	T pop() {
@@ -121,14 +122,22 @@ public class Heap<T extends Comparable<? super T>> {
 		list.set(l, temp);
 	}
 
+	public static <E extends Comparable<? super E>> void sort(E[] array) {
+		Heap<E> heap = new Heap<>();
+		for (int i = 0; i < array.length; i++) 
+			heap.push(array[i]);
+		for (int i = 0; i < array.length; i++) 
+			array[i] = heap.pop();
+	}
+	
 	public static void main(String[] args) {
-
+//		logger.setLevel(Level.INFO);
 		Integer[] arr = new Integer[] { 3, 1, 6, 5, 2, 4, 9, 7, 8};
 		Heap<Integer> heap = new Heap<>();
 		Random r = new Random();
-		// for (int i = 0; i < 20; i++) {
-		// heap.add(r.nextInt(30));
-		// }
+		 for (int i = 0; i < 20; i++) {
+		 heap.push(r.nextInt(30));
+		 }
 		for (Integer integer : arr) {
 			heap.push(integer);
 		}
@@ -136,7 +145,8 @@ public class Heap<T extends Comparable<? super T>> {
 		System.out.println(Arrays.deepToString(heap.list.toArray()));
 		System.out.println(heap.toTreeString());
 		
-		logger.setLevel(Level.ERROR);
+//		logger.setLevel(Level.ERROR);
+		logger.setLevel(Level.INFO);
 		while (heap.list.size() > 1) {
 			System.out.println(heap.pop());
 		}
