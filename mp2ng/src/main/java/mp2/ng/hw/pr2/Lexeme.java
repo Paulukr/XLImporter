@@ -2,28 +2,32 @@ package mp2.ng.hw.pr2;
 	
 public class Lexeme implements Comparable<Lexeme>{
 	static LexemPool lexemPool;
+	boolean mark;
 	static{
 		if (lexemPool == null) 
 			lexemPool = new LexemPool();
 	}
 	
 	String text;
+	public Lexeme(String text) {
+		this.text = text;
+	}
 	public static Lexeme lexemeFactory(String rawLexem) {
 		return lexemPool.add(rawLexem);
 	}
-	public Lexeme(String text) {
-		text = this.text;
-	}
-	boolean mark;
-	String content;
+
 	
 	@Override
-	public int compareTo(Lexeme o) {
-		return text.compareTo(o.text);
+	public int compareTo(Lexeme other) {
+		return text.compareTo(other.text);
 	}
 	@Override
 	public boolean equals(Object obj) {
-		return super.equals(obj);
+		return this == obj;
+	}
+	@Override
+	public String toString() {
+		return text;
 	}
 	
 	

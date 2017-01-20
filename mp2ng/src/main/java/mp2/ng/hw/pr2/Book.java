@@ -14,7 +14,7 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 public class Book {
-	List<Sentence> theText;
+	List<Sentence> theText = new ArrayList<>();
 	List<String> lexicon = new ArrayList<>();
 	public static void main(String[] args) {
 		String path = "E:\\Android\\ngdwp\\ngGitHome\\mp2ng\\src\\main\\java\\mp2\\ng\\hw\\pr2\\data\\Galaxy.txt";
@@ -47,27 +47,36 @@ public class Book {
 		if(text == null)
 			System.exit(0);
 		text = clean(text);
-
-		LexemPool lexemPool1 = new LexemPool();
 		
-		String[] rawSentences = text.split(".");
+		System.out.println("text.size() " + text.length());
+		System.out.println("rawSentences.size() " + text.substring(0, 1000));
+		
+		String[] rawSentences = text.split("\\.");
+		System.out.println("rawSentences.size() " + rawSentences.length);
 		for (String rawSentence : rawSentences) {
-			Sentence sentence = new Sentence();
-
+			theText.add(new Sentence(rawSentence));
 		}
+		System.out.println("theText.size() " + theText.size());
 		
+		System.out.println("Lexeme.lexemPool.lexems.size() " + Lexeme.lexemPool.lexems.size());
 		
+		for (int i = 0; i < 10; i++) 
+			System.out.println(i + "  " + theText.get(i));
+		
+		for (int i = 0; i < 300; i++) 
+			System.out.println(i + "  " + Lexeme.lexemPool.lexems.get(i));
+	}
 		
 		
 		
 		
 		
 
-		String[] units = text.split(" ");
-//		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
-		
-		Arrays.asList(units).stream().map(String::toLowerCase).distinct().sorted().forEach(lexicon::add);
-		System.out.println("Words count " + lexicon.size());
+//		String[] units = text.split(" ");
+////		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
+//		
+//		Arrays.asList(units).stream().map(String::toLowerCase).distinct().sorted().forEach(lexicon::add);
+//		System.out.println("Words count " + lexicon.size());
 //		for (int i = 0; i < 500; i++) {
 //			System.out.println(i+"  " +lexicon.get(i));
 //		}
@@ -86,57 +95,57 @@ public class Book {
 		 *  		
 		 *  
 		 */
-		String[] units_ = new String[units.length];
-		LexemPool lexemPoolBook = new LexemPool();
-		Outer:
-		for (int i = 0; i < units.length; i++) {	
-			String string = units[i];
-			units_[i] = lexemPoolBook.add(string).text;
-//			System.out.println(string);
-
-			
-		}
-		
-		System.out.println(lexemPoolBook.lexems.size());
-		System.out.println("units");
-		for (int i = 100; i < 140; i++) {
-		System.out.print("  " +units[i]);
-	}
-		System.out.println("\nunits_");
-		for (int i = 100; i < 140; i++) {
-		System.out.print("  " +units_[i]);
-	}
-		String outText = "";
-		outText = Arrays.asList(units_).stream().reduce((a,b) -> {return a + " " + b;}).toString();
-		System.out.println("Result " + text.equals(outText));
+//		String[] units_ = new String[units.length];
+//		LexemPool lexemPoolBook = new LexemPool();
 //		Outer:
 //		for (int i = 0; i < units.length; i++) {	
 //			String string = units[i];
-//			for (String lexem : lexicon) {
-//				if(lexem.equals(string)){
-//					units_[i] = lexem;
-//					continue Outer;
-//				}
+//			units_[i] = lexemPoolBook.add(string).text;
+////			System.out.println(string);
 //
-//			}
-//			System.out.println("error \"" + string + "\" " + i);
-//			break Outer;
+//			
 //		}
-		System.out.println("\n" + lexicon.get(30).equals(","));
-//		lexicon.stream().map(() -> {}).fo
-//		System.out.println(lexicon.);
-		//text to lexems
-		
-		
-		
-//		String[] rawSentences = text.split(".");
+//		
+//		System.out.println(lexemPoolBook.lexems.size());
+//		System.out.println("units");
+//		for (int i = 100; i < 140; i++) {
+//		System.out.print("  " +units[i]);
+//	}
+//		System.out.println("\nunits_");
+//		for (int i = 100; i < 140; i++) {
+//		System.out.print("  " +units_[i]);
+//	}
+//		String outText = "";
+//		outText = Arrays.asList(units_).stream().reduce((a,b) -> {return a + " " + b;}).toString();
+//		System.out.println("Result " + text.equals(outText));
+////		Outer:
+////		for (int i = 0; i < units.length; i++) {	
+////			String string = units[i];
+////			for (String lexem : lexicon) {
+////				if(lexem.equals(string)){
+////					units_[i] = lexem;
+////					continue Outer;
+////				}
+////
+////			}
+////			System.out.println("error \"" + string + "\" " + i);
+////			break Outer;
+////		}
+//		System.out.println("\n" + lexicon.get(30).equals(","));
+////		lexicon.stream().map(() -> {}).fo
+////		System.out.println(lexicon.);
+//		//text to lexems
+//		
+//		
+//		
+////		String[] rawSentences = text.split(".");
+//
+//
+//
+////		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
 
 
 
-//		sentences.stream().forEach(a -> {a.stream().forEach(b -> System.out.print(b + " ")); System.out.println(". ");});
-
-
-	}
 
 
 	public static String clean(String text) {
