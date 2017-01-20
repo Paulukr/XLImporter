@@ -30,15 +30,23 @@ public class Heap<T extends Comparable<? super T>> {
 	{
 		list.add(null);
 	}
-
-	void push(T element) {
+	
+	public T get(int i){
+		return list.get(i);
+	}
+	public T peek() {
+		if(list.size() > 1)
+			return get(1);
+		return null;
+	}
+	public void push(T element) {
 		logger.log(Level.INFO, "\n add: " + element);
 		list.add(element);
 		int k = list.size() - 1;
 		pullUp(k);
 	}
 
-	void pullUp(int k) {
+	private void pullUp(int k) {
 		logger.log(Level.INFO, "pullup:");
 		T current = list.get(k);
 		logger.log(Level.INFO, toString());
@@ -50,25 +58,18 @@ public class Heap<T extends Comparable<? super T>> {
 
 	}
 
-	void pullDown(int k) {
-		T current = list.get(k);
-		Loop:
-		while (2 * k < list.size()) {
-			if((2*k+1 < list.size()) && left(k).compareTo(right(k)) > 0){
-				if (current.compareTo(right(k)) > 0){ 
-					swapRight(k);
-					k = k*2+1;
-				}
-				else 
-					break Loop;
-			}else {
-				if (current.compareTo(left(k)) > 0){
-					swapLeft(k);
-					k *= 2;
-				}
-				else 
-					break Loop;
-			}
+	private void pullDown(int k) {
+		int current = k;
+		T value = list.get(k);
+		for (int branch = k << 1; branch < list.size(); current = branch, branch <<= 1) {
+
+			if (branch + 1 < list.size() && (get(branch).compareTo(get(branch + 1)) > 0)) // "left branch > right branch"
+				branch++;// then right is target, else left
+
+			if (value.compareTo(get(branch)) > 0)
+				swap(current, branch);
+			else
+				break;
 			logger.log(Level.INFO, toString());
 		}
 
@@ -92,7 +93,7 @@ public class Heap<T extends Comparable<? super T>> {
 		return result;
 	}
 
-	final T parent(int k) {
+	private final T parent(int k) {
 		return list.get(k / 2);
 	}
 
@@ -146,7 +147,7 @@ public class Heap<T extends Comparable<? super T>> {
 		System.out.println(heap.toTreeString());
 		
 //		logger.setLevel(Level.ERROR);
-		logger.setLevel(Level.INFO);
+//		logger.setLevel(Level.INFO);
 		while (heap.list.size() > 1) {
 			System.out.println(heap.pop());
 		}
