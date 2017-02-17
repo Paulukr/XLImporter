@@ -13,6 +13,12 @@ public class Sentence {
 	public Sentence(String[] rawSentence) {
 		init(rawSentence);
 	}
+	public Sentence() {
+		// TODO Auto-generated constructor stub
+	}
+	public void add(Lexeme lexeme){
+		lexemas.add(lexeme);
+	}
 	public void init(String rawSentence) {
 		counter++;
 //		if(counter < 100) System.out.println(rawSentence);

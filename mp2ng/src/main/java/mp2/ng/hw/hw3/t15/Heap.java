@@ -31,6 +31,13 @@ import org.apache.log4j.Level;
  *  close tag
  *  startDocument, endDocument, startElement, and endElement
  *  
+ *  
+ *  xlink type = "extended"
+ *  
+ *  https://docs.oracle.com/database/121/ADXDK/adx_j_xqj.htm#ADXDK99930
+ *   xquery tool for generation java classes from xsd file for xml parsing
+ *   
+ *   marshaling JAXBContext
  */
 
 public class Heap<T extends Comparable<? super T>> {

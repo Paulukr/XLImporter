@@ -1,3 +1,4 @@
+/* this class looses out of seen all necessary classes from main directory after IDE restart
 package mp2ng.hw2;
 
 import static org.junit.Assert.assertEquals;
@@ -84,3 +85,4 @@ public class StateTest {
 	}
 
 }
+*/
