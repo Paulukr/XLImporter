@@ -15,12 +15,10 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-
-
- import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.formula.EvaluationCell;
+import org.apache.poi.ss.usermodel.*;
 public class Extracter {
-	
+	public final static int ev = 1;
 
 	String fileAddress;
 	String fileName;

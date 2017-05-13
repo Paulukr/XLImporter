@@ -6,8 +6,6 @@ package mp2.ng.hw.hw4.Battleship;
 
 import java.util.Random;
 
-import mp2.ng.hw.hw4.Battleship.Field.AtackResult;
-
 /************************************************************/
 /**
  * 

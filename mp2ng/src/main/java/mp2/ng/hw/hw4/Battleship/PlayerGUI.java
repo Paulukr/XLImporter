@@ -1,7 +1,5 @@
 package mp2.ng.hw.hw4.Battleship;
 
-import mp2.ng.hw.hw4.Battleship.Field.AtackResult;
-
 public class PlayerGUI extends Player {
 	private GUI gui;
 	Point target;

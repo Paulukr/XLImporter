@@ -5,7 +5,7 @@ import java.util.Deque;
 import com.mysql.cj.x.protobuf.MysqlxCrud.Insert;
 
 public class LeadDao {
-
+	public final static int dv = 1;
 	public LeadDao() {
 		
 	}

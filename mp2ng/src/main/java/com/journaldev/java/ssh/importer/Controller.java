@@ -8,23 +8,32 @@ import java.util.Date;
 import java.util.Deque;
 
 public class Controller {
+	public final static int cv = 1;
+	
+	ImportUI importUI;
+	
 	Extracter extracter;
 	Deque<LeadShort> leads = new ArrayDeque<>();
 	public Controller() {
-		// TODO Auto-generated constructor stub
+		importUI = new ImportUI();
 	}
 
 	public static void main(String[] args) {
 		Controller controller = new Controller();
+		
+		
+		
 		controller.doimport();
 	}
 	public void doimport() {
-		
-		String fileAddress = "E:\\Android\\ngdwp\\ngGitHome\\mp2ng\\target\\classes\\com\\journaldev\\java\\ssh";
-		String fileName = "\\Leads.xlsx";
-		
+		String path = importUI.getPath();
+//		
+//		String fileAddress = "E:\\Android\\ngdwp\\ngGitHome\\mp2ng\\target\\classes\\com\\journaldev\\java\\ssh";
+//		String fileName = "\\Leads.xlsx";
+//		
 		extracter = new Extracter();
-		extracter.init(fileAddress, fileName);
+//		extracter.init(fileAddress, fileName);
+		extracter.init(path,"");
 		extracter.extract(true);
 		
 //		extracter.data.forEach(a->a.forEach(b->System.out.println(b.toString())));
