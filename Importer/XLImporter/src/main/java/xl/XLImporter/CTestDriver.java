@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.function.Consumer;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -15,8 +16,9 @@ import com.jcraft.jsch.Session;
 public class CTestDriver
 {
 	Connection con = null;
-
-	public CTestDriver() {
+	Consumer<Object> log;
+	public CTestDriver(Consumer<Object> log) {
+		this.log = log;
 		try
 		{
 			String strSshUser = "root"; // SSH loging username
@@ -43,6 +45,7 @@ public class CTestDriver
 		}
 
 	}
+	
 	public void close() {
 		try {
 			con.close();
@@ -116,13 +119,15 @@ public class CTestDriver
 	}
 	void executeUpdate(String sql){
 		//STEP 4: Execute a query
-		System.out.println("Creating statement...");
+		log.accept("Creating statement...");
+		
 		try(	Statement stmt = con.createStatement()) {
 
 			//STEP 5: Extract data from result set
 			try {
 				int rs = stmt.executeUpdate(sql);
 				System.out.println("update: " + rs);
+				log.accept("Database response for update\n" + "inserted: " + rs + " rows");
 			}catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -135,11 +140,12 @@ public class CTestDriver
 	}
 	public static void soleTest()
 	{
-		CTestDriver cTestDriver = new CTestDriver();
+		Consumer<Object> log = System.out::println;
+		CTestDriver cTestDriver = new CTestDriver(log);
 //		cTestDriver.testQuery();
 		String sql = "SELECT IsoCode, Alpha2, Alpha3 FROM main_base.countries limit 5";
 		cTestDriver.executeQuery(sql);
 		cTestDriver.close();
-		System.exit(0);
+//		System.exit(0);
 	}
 }

@@ -1,11 +1,13 @@
 package xl.XLImporter;
 
 import java.util.Deque;
+import java.util.function.Consumer;
 
 public class LeadDao {
 	public final static int dv = 1;
-	public LeadDao() {
-		
+	Consumer<Object> log;
+	public LeadDao(Consumer<Object> log) {
+		this.log = log;
 	}
 	public void createTable(String name, CTestDriver cTestDriver) {
 		String query = "CREATE TABLE toimport." + name + " (" +
@@ -23,7 +25,8 @@ public class LeadDao {
 //	Currency varchar(255),
     "PRIMARY KEY (LeadID)"+
 ");";
-		System.out.println(query);
+//		System.out.println(query);
+		log.accept(query);
 		cTestDriver.executeUpdate(query);
 	}
 	public void insertTest(String tableName, CTestDriver cTestDriver) {

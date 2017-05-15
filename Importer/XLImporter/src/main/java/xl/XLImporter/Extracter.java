@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -168,6 +170,25 @@ public class Extracter {
 	            }
 	        }
 	    }
+	}
+	public void dangConv(Deque<LeadShort> leads){
+		data.forEach(row->{
+			leads.add(new LeadShort());
+			ArrayList<Object> rowArray = new ArrayList<>(row);
+//			Double temp = (Double) rowArray.get(1);
+//			leads.getLast().firstName = ((Double)rowArray.get(1)).toString();
+			
+//			String string = (String) rowArray.get(0);
+			
+//			leads.getLast().firstName = ((String)rowArray.get(0)).toString();
+//			System.out.println(temp);
+
+			leads.getLast().firstName = ((String)rowArray.get(0)).toString();
+//			System.out.println(leads.getLast().firstName);
+			leads.getLast().countryISO = ((Double)rowArray.get(1)).intValue();
+			leads.getLast().phone = ((Double)rowArray.get(2)).longValue();
+			leads.getLast().email = ((String)rowArray.get(3)).toString();
+		});
 	}
 
 }
