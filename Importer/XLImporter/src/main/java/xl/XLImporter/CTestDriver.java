@@ -133,7 +133,7 @@ public class CTestDriver
 		}
 
 	}
-	public static void main(String[] args)
+	public static void soleTest()
 	{
 		CTestDriver cTestDriver = new CTestDriver();
 //		cTestDriver.testQuery();

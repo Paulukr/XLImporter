@@ -26,13 +26,10 @@ public class Controller {
 		controller.doimport();
 	}
 	public void doimport() {
-		String path = importUI.getPath();
-//		
 //		String fileAddress = "E:\\Android\\ngdwp\\ngGitHome\\mp2ng\\target\\classes\\com\\journaldev\\java\\ssh";
 //		String fileName = "\\Leads.xlsx";
-//		
+		String path = importUI.getPath();
 		extracter = new Extracter();
-//		extracter.init(fileAddress, fileName);
 		extracter.init(path,"");
 		extracter.extract(true);
 		
@@ -44,8 +41,7 @@ public class Controller {
 		LeadDao leadDao = new LeadDao();
 		CTestDriver cTestDriver = new CTestDriver();
 		
-//		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss");
-		DateFormat dateFormat = new SimpleDateFormat("HH_mm_ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		Date date = new Date();
 		System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
 		

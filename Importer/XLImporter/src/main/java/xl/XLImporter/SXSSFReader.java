@@ -41,7 +41,7 @@ public class SXSSFReader {
 		return result;
 	}
 	
-	public static void main(String[] args) throws Throwable {
+	public static void soleTest() throws Throwable {
 		example();
 	}
 	public static XSSFWorkbook readWorkBook(String file){
