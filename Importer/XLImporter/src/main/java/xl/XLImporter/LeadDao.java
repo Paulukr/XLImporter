@@ -1,5 +1,8 @@
 package xl.XLImporter;
 
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Deque;
 import java.util.function.Consumer;
 
@@ -27,7 +30,8 @@ public class LeadDao {
 ");";
 //		System.out.println(query);
 		log.accept(query);
-		cTestDriver.executeUpdate(query);
+		int result = cTestDriver.executeUpdate(query);
+		log.accept("db responce: " + result);
 	}
 	public void insertTest(String tableName, CTestDriver cTestDriver) {
 		StringBuilder query = new StringBuilder();
@@ -35,7 +39,8 @@ public class LeadDao {
 		query.append(" toimport." + tableName);
 		query.append(" (First_name, EMail ,Phone, CountryISO) values ");
 		query.append(" ('aa', 'ee', 10, 20);");
-		cTestDriver.executeUpdate(query.toString());
+		int result = cTestDriver.executeUpdate(query.toString());
+		log.accept("db responce: " + result);
 	}
 	public void insert(String tableName, CTestDriver cTestDriver, Deque<LeadShort> leads) {
 		StringBuilder query = new StringBuilder();
@@ -58,6 +63,126 @@ public class LeadDao {
 		}
 		query.append(";");
 //		query.append(" ('aa', 'ee', 10, 20);");
-		cTestDriver.executeUpdate(query.toString());
+		int result = cTestDriver.executeUpdate(query.toString());
+		log.accept("db responce: " + result);
+	}
+	void saleCheckProcedure(int buyer, String region, CTestDriver cTestDriver){
+		String procedure = "SaleCheckProcedure(?,?)";
+		Consumer<CallableStatement> setter = cs ->{
+			try {
+				cs.setInt(1, buyer);
+				cs.setString(2, region);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		Consumer<ResultSet> getter = rs ->{
+			try {
+				String result = rs.getString(1);
+				log.accept("call responce: " + result);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		cTestDriver.call(procedure, setter, getter);
+	}
+	void saleCheckProcedure1(int buyer, String region, CTestDriver cTestDriver){
+		String procedure = "`invo`.`invo.sale_check_procedure`(?,?)";
+		Consumer<CallableStatement> setter = cs ->{
+			try {
+				cs.setInt(1, buyer);
+				cs.setString(2, region);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		Consumer<ResultSet> getter = rs ->{
+			try {
+				String result2 = rs.getString(1);
+				log.accept("call responce: " + " 2) " + result2 + " 3) ");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		cTestDriver.call(procedure, setter, getter);
+	}
+	void showCountriesProcedure(CTestDriver cTestDriver){
+		String procedure = "`invo`.`show_countries`()";
+		Consumer<CallableStatement> setter = cs ->{};
+		Consumer<ResultSet> getter = rs ->{
+			try {
+				String result2 = rs.getString(1);
+				log.accept("call responce: " + " 2) " + result2 + " 3) ");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		cTestDriver.call(procedure, setter, getter);
+	}
+	void buyerPreviewProcedure(int buyer, CTestDriver cTestDriver){
+		String procedure = "`invo`.`BuyerPreview`(?)";
+		Consumer<CallableStatement> setter = cs ->{
+			try {
+				cs.setInt(1, buyer);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		Consumer<ResultSet> getter = rs ->{
+			try {
+				String result2 = rs.getString(1);
+				String result3 = rs.getString(2);
+				log.accept("call responce: " + result2  + "  " + result3 + " ");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		cTestDriver.call(procedure, setter, getter);
+	}
+	void addBuyer(String buyerName, String description, CTestDriver cTestDriver){
+		String procedure = "`invo`.`add_buyer`(?,?)";
+		Consumer<CallableStatement> setter = cs ->{
+			try {
+				cs.setString(1, buyerName);
+				cs.setString(2, buyerName);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		Consumer<ResultSet> getter = rs ->{
+			try {
+				String result2 = rs.getString(1);
+				String result3 = rs.getString(2);
+				String result4 = rs.getString(3);
+				log.accept("call responce: " + result2  + "  " + result3 + "  " + result3);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		cTestDriver.call(procedure, setter, getter);
+	}
+	void salePreview(int buyerid, String region, int count, CTestDriver cTestDriver){
+		String procedure = "`invo`.`sale_preview_procedure`(?,?,?)";
+		Consumer<CallableStatement> setter = cs ->{
+			try {
+				cs.setInt(1, buyerid);
+				cs.setString(2, region);
+				cs.setInt(3, count);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		Consumer<ResultSet> getter = rs ->{
+			try {
+				String result2 = rs.getString(1);
+				String result3 = rs.getString(2);
+				String result4 = rs.getString(3);
+				log.accept("call responce: " + result2  + "  " + result3 + "  " + result3);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		};
+		cTestDriver.call(procedure, setter, getter);
 	}
 }
+

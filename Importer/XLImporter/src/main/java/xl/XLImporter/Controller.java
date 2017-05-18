@@ -35,6 +35,8 @@ public class Controller {
 		String path = importUI.getPath();
 		importUI.println(path);
 		
+		
+		
 		if (promptYesNo("Proceed")) {
 			doimport(path);
 		}
@@ -62,9 +64,10 @@ public class Controller {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
 		Date date = new Date();
 		System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
-		importUI.println(dateFormat.format(date));
+//		importUI.println(dateFormat.format(date));
 		
 		String tableName =  "new_table" + dateFormat.format(date);
+		importUI.println(tableName);
 		//dbcon
 		Runnable executeSql = new Runnable() {
 			
@@ -73,6 +76,12 @@ public class Controller {
 				LeadDao leadDao = new LeadDao(log);
 				leadDao.createTable(tableName, cTestDriver);
 				leadDao.insert(tableName, cTestDriver,leads);
+//				leadDao.saleCheckProcedure1(10, "Eng", cTestDriver);
+//				leadDao.showCountriesProcedure(cTestDriver);
+//				leadDao.buyerPreviewProcedure(1, cTestDriver);
+//				leadDao.addBuyer("AnitherBuyer", "Hello", cTestDriver);
+				leadDao.salePreview(48, "Eng", 100, cTestDriver);
+				
 				
 			}
 		};
