@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Importer/XLImporter/src/main/java"/>
+	<classpathentry kind="src" path="Importer/XLImporter/src/test/java"/>
+	<classpathentry excluding="mp2/util/" kind="src" path="mp2ng/src/main/java"/>
+	<classpathentry kind="src" path="mp2ng/src/main/java/mp2/util"/>
+	<classpathentry excluding="mp2ng/hw2/" kind="src" path="mp2ng/src/test/java"/>
+	<classpathentry kind="src" path="mp2ng/src/test/java/mp2ng/hw2"/>
+	<classpathentry kind="lib" path="Importer/XLImporter/target/original-XLImporter-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="Importer/XLImporter/target/XLImporter-0.0.1-SNAPSHOT-shaded.jar"/>
+	<classpathentry kind="lib" path="Importer/XLImporter/target/XLImporter-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="mp2ng/org.eclipse.jdt.annotation_2.1.0.v20160418-1457.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="Importer/XLImporter/target/classes"/>
+</classpath>

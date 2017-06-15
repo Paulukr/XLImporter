@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.Properties;
 import java.util.function.Consumer;
 
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
@@ -16,6 +18,7 @@ import com.jcraft.jsch.Session;
 
 public class CTestDriver
 {
+	public ChannelSftp channelSftp = null;
 	Connection con = null;
 	Consumer<Object> log;
 	public CTestDriver(Consumer<Object> log) {
@@ -32,7 +35,8 @@ public class CTestDriver
 			String strDbUser = "excel1"; // database loging username
 			String strDbPassword = "mypass"; // database login password
 
-			CTestDriver.doSshTunnel(strSshUser, strSshPassword, strSshHost, nSshPort, strRemoteHost, nLocalPort, nRemotePort);
+			//CTestDriver.doSshTunnel(strSshUser, strSshPassword, strSshHost, nSshPort, strRemoteHost, nLocalPort, nRemotePort);
+			doSshTunnelWithFTP(strSshUser, strSshPassword, strSshHost, nSshPort, strRemoteHost, nLocalPort, nRemotePort);
 
 			//Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:"+nLocalPort, strDbUser, strDbPassword);
@@ -67,6 +71,26 @@ public class CTestDriver
 
 		session.connect();
 		session.setPortForwardingL(nLocalPort, strRemoteHost, nRemotePort);
+
+	}
+	private void doSshTunnelWithFTP( String strSshUser, String strSshPassword, String strSshHost, int nSshPort, String strRemoteHost, int nLocalPort, int nRemotePort ) throws JSchException
+	{
+		final JSch jsch = new JSch();
+		Session session = jsch.getSession( strSshUser, strSshHost, 22 );
+		session.setPassword( strSshPassword );
+
+		final Properties config = new Properties();
+		config.put("StrictHostKeyChecking", "no" );
+		session.setConfig( config );
+
+		session.connect();
+		session.setPortForwardingL(nLocalPort, strRemoteHost, nRemotePort);
+		
+		//sftp
+		Channel     channel     = null;
+		channel = session.openChannel("sftp");
+        channel.connect();
+        channelSftp = (ChannelSftp)channel;
 	}
 	void testQuery(){
 		//STEP 4: Execute a query

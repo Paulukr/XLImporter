@@ -173,13 +173,28 @@ public class LeadDao {
 			}
 		};
 		Consumer<ResultSet> getter = rs ->{
+			StringBuilder result = new StringBuilder();
 			try {
-				String result2 = rs.getString(1);
-				String result3 = rs.getString(2);
-				String result4 = rs.getString(3);
-				log.accept("call responce: " + result2  + "  " + result3 + "  " + result3);
+//				String result2 = rs.getString(1);
+//				String result3 = rs.getString(2);
+//				String result4 = rs.getString(3);
+				int i = 1;
+				String string = new String();
+				do {
+					string = rs.getString(i++);
+					result.append(string);
+				} while (string != null);
+				
+				while (true) {
+					log.accept("call responce: " + rs.getString(i));
+					
+				}
+//				log.accept("call responce: " + result2  + "  " + result3 + "  " + result3);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+			}
+			finally{
+				log.accept("call responce: " + result);
 			}
 		};
 		cTestDriver.call(procedure, setter, getter);

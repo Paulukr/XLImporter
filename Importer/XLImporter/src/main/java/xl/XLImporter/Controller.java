@@ -1,5 +1,10 @@
 package xl.XLImporter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -8,6 +13,8 @@ import java.util.Deque;
 import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
+
+import com.jcraft.jsch.SftpException;
 
 public class Controller {
 	public final static int cv = 1;
@@ -81,6 +88,29 @@ public class Controller {
 //				leadDao.buyerPreviewProcedure(1, cTestDriver);
 //				leadDao.addBuyer("AnitherBuyer", "Hello", cTestDriver);
 				leadDao.salePreview(48, "Eng", 100, cTestDriver);
+				
+
+				
+				String SFTPWORKINGDIR = "../var/lib/mysql-files/";
+				String FILETOTRANSFER = "E:\\Android\\Leads.csv"; // 
+				String WWW = "../var/www/sub.noblecapitalhouse.com/html/public/data/";
+	            File f = new File(FILETOTRANSFER);
+	            try {
+	            	System.out.println(f);
+	            	System.out.println(cTestDriver.channelSftp);
+//					cTestDriver.channelSftp.put(new FileInputStream(f), f.getName());
+//					cTestDriver.channelSftp.put(FILETOTRANSFER, SFTPWORKINGDIR);
+//					cTestDriver.channelSftp.put(FILETOTRANSFER, SFTPWORKINGDIR+"Leads1.csv");
+					cTestDriver.channelSftp.get(SFTPWORKINGDIR+"Leads1.csv", FILETOTRANSFER+"1");
+					cTestDriver.channelSftp.put(FILETOTRANSFER +"1",WWW+"Leads1.csv");
+					cTestDriver.channelSftp.get(WWW+"Leads1.csv", FILETOTRANSFER+"2");
+					cTestDriver.channelSftp.put(FILETOTRANSFER+"2", SFTPWORKINGDIR+"Leads1import.csv");
+				} catch (SftpException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            
+				cTestDriver.channelSftp.disconnect();
 				
 				
 			}
